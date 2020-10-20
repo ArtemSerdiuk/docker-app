@@ -22,4 +22,4 @@ ADD . .
 EXPOSE 80
 
 # start app
-ENTRYPOINT ng serve --host 0.0.0.0
+ENTRYPOINT ng serve --host=0.0.0.0
