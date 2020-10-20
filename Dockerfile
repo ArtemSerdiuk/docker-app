@@ -17,9 +17,8 @@ RUN npm install
 
 ADD . .
 
-RUN npm run build:ssr:$ENV
 
 EXPOSE 80
 
 # start app
-ENTRYPOINT npm run serve:ssr
+ENTRYPOINT ng serve --host 0.0.0.0
