@@ -18,8 +18,5 @@ RUN npm install -g @angular/cli@10.0.8
 
 ADD . .
 
-
-EXPOSE 80
-
 # start app
 ENTRYPOINT ng serve --host=0.0.0.0
