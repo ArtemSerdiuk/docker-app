@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 0.0.0.0 -c local-development",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev:ssr": "ng run docker-app:serve-ssr",
     "serve:ssr": "node dist/docker-app/server/main.js",
-    "build:ssr:prod": "ng build --prod && ng run docker-app:server:production",
+    "build:ssr": "ng build --prod && ng run docker-app:server:production",
     "prerender": "ng run docker-app:prerender"
   },
   "private": true,

@@ -1,22 +1,21 @@
-# Set Global arg
-ARG ENV=prod
-
-# STAGE 1: Build
-# base image
 FROM node:12.14.1-alpine as build-stage
 
-# For using the global arg in this build stage
-ARG ENV
-
-# set working directory
+RUN mkdir -p /app
 WORKDIR /app
 
-# install and cache app dependencies
-COPY package.json /app/package.json
+COPY package.json /app/
 RUN npm install
-RUN npm install -g @angular/cli@10.0.8
+COPY . /app/
 
-ADD . .
+RUN npm run build:ssr
+
+CMD ["npm", "run", "serve:ssr"]
 
 # start app
-ENTRYPOINT ng serve --host=0.0.0.0
+EXPOSE 4000
+
+FROM nginx:1.19.4-alpine
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+# Copy the default nginx.conf provided by tiangolo/node-frontend
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
